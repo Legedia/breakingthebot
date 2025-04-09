@@ -1,57 +1,54 @@
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    display: flex;
-    height: 100vh;
-  }
-  .container {
-    display: flex;
-    width: 100%;
-  }
-  .sidebar {
-    width: 60px;
-    background: #1e1e2f;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-  }
-  .tool-button {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 24px;
-    margin: 10px 0;
-    cursor: pointer;
-  }
-  .main-content {
-    flex: 1;
-    padding: 20px;
-    background: #f4f4f4;
-  }
-  .tool-section {
-    display: none;
-  }
-  .tool-section:not(.hidden) {
-    display: block;
-  }
-  textarea, input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    font-size: 16px;
-  }
-  .chat-window {
-    display: flex;
-    flex-direction: column;
-    height: 300px;
-  }
-  .chat-log {
-    flex: 1;
-    background: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
-    overflow-y: auto;
-    margin-bottom: 10px;
-  }
-  
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f4f8;
+  color: #333;
+  margin: 0;
+  padding: 2rem;
+}
+
+h2 {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  color: #111;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.3rem;
+}
+
+textarea, input[type="text"] {
+  width: 300px;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  display: block;
+}
+
+button {
+  margin-top: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #3730a3;
+}
+
+#toolbar {
+  margin-bottom: 2rem;
+}
+
+#toolbar button {
+  background-color: #f472b6;
+  margin-right: 0.5rem;
+}
+
+#toolbar button:hover {
+  background-color: #be185d;
+}
