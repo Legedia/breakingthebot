@@ -107,3 +107,41 @@ footer {
   margin: 1em auto; /* Center the image with some top/bottom margin */
   display: block; /* To allow centering with margin: auto */
 }
+
+/* Responsive CSS */
+@media (max-width: 600px) {
+  body {
+      margin: 0; /* Adjust margins for smaller screens */
+      padding: 0;
+  }
+
+  header {
+      padding: 1.5em;
+  }
+
+  h1 {
+      font-size: 2em; /* Smaller heading for smaller screens */
+  }
+
+  h2 {
+      font-size: 1.5em;
+  }
+
+  nav ul {
+      flex-direction: column; /* Stack navigation links on smaller screens */
+      align-items: center;
+  }
+
+  nav ul li {
+      margin: 0.5em 0;
+  }
+
+  main {
+      margin: 10px; /* Adjust main margin */
+      padding: 15px;
+  }
+
+  .profile-image {
+      width: 100px; /* Smaller profile image */
+  }
+}
