@@ -1,50 +1,109 @@
 /* style.css */
 
 body {
-  font-family: sans-serif; /* A basic sans-serif font for readability */
-  margin: 20px; /* Add some margin around the page content */
-  background-color: #f4f4f4; /* A light gray background */
-  color: #333; /* Dark gray text color */
+  font-family: sans-serif;
+  margin: 0; /* Remove default body margin for full background */
+  background-color: #28426c; /* Your dark blue background */
+  color: #00ffff; /* Your cyan font color */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the body takes at least the full viewport height */
 }
 
 header {
-  background-color: #333; /* Dark background for the header */
-  color: #fff; /* White text color for the header */
-  padding: 1em; /* Add padding inside the header */
-  text-align: center; /* Center the header content */
+  background-image: linear-gradient(to bottom, rgba(40, 66, 108, 0.8), transparent); /* Subtle gradient */
+  color: #00ffff;
+  padding: 2em;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); /* Subtle glow around header */
 }
 
 nav ul {
-  list-style: none; /* Remove bullet points from the navigation list */
-  padding: 0; /* Remove default padding from the list */
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
 }
 
 nav ul li {
-  display: inline; /* Display list items horizontally */
-  margin-right: 15px; /* Add some spacing between navigation links */
+  margin: 0 15px;
 }
 
 nav a {
-  color: #fff; /* White link color */
-  text-decoration: none; /* Remove underlines from links */
+  color: #00ffff;
+  text-decoration: none;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); /* Glow on links */
 }
 
 main {
-  padding: 20px; /* Add padding to the main content area */
-  background-color: #fff; /* White background for the main content */
-  border: 1px solid #ddd; /* Light gray border around the main content */
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.1); /* Slightly transparent background for content area */
+  border-radius: 8px;
+  margin: 20px auto; /* Center the main content */
+  max-width: 800px; /* Limit the width of the main content */
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2); /* Glow around main content */
 }
 
 section {
-  margin-bottom: 20px; /* Add spacing between sections */
+  margin-bottom: 2em;
+  padding: 1em;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, rgba(0, 255, 255, 0.05), transparent); /* Subtle gradient on sections */
+}
+
+h1 {
+  text-shadow: 0 0 8px #00ffff; /* Stronger glow on the main heading */
+  animation: breakingBotBlink 2s infinite alternate; /* Apply the blinking animation */
 }
 
 h2 {
-  color: #333; /* Dark gray heading color */
+  color: #00ffff;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.4); /* Glow on section headings */
+}
+
+p {
+  line-height: 1.6;
+  text-shadow: 0 0 3px rgba(0, 255, 255, 0.2); /* Subtle glow on paragraphs */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 0.5em;
+}
+
+ul li a {
+  color: #00ffff;
+  text-decoration: none;
+  text-shadow: 0 0 4px rgba(0, 255, 255, 0.3); /* Glow on list links */
 }
 
 footer {
-  text-align: center; /* Center the footer text */
-  padding-top: 10px; /* Add some padding above the footer */
-  color: #777; /* Light gray text color for the footer */
+  text-align: center;
+  padding: 1em 0;
+  color: #00ffff;
+  background-color: rgba(40, 66, 108, 0.5); /* Semi-transparent footer background */
+  margin-top: auto; /* Push footer to the bottom */
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); /* Subtle glow around footer */
+}
+
+/* Blinking animation for BreakingtheBot text */
+@keyframes breakingBotBlink {
+  from { opacity: 1; }
+  to { opacity: 0.7; }
+}
+
+/* Style for the profile image */
+.profile-image {
+  width: 150px; /* Adjust size as needed */
+  height: auto;
+  border-radius: 50%; /* Make it circular */
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+  margin: 1em auto; /* Center the image with some top/bottom margin */
+  display: block; /* To allow centering with margin: auto */
 }
