@@ -1,28 +1,43 @@
+<!-- File: templates/index.html -->
 <!DOCTYPE html>
-<html lang="en" class="bg-black text-white">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Breaking the Bot</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script defer src="https://unpkg.com/alpinejs"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BreakingTheBot - AI Sandbox</title>
+  <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body class="p-6">
-  <header class="text-center mb-6">
-    <h1 class="text-5xl font-bold">Breaking the Bot</h1>
-    <p class="text-gray-400 mt-2">@BreakingTheBot | AI Sandbox & Experiments</p>
-  </header>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>🧠</h2>
+      <button class="tool-button" data-tool="prompt">🧠</button>
+      <button class="tool-button" data-tool="regex">🧪</button>
+      <button class="tool-button" data-tool="chatbot">🤖</button>
+    </aside>
 
-  <section class="my-10">
-    <h2 class="text-3xl font-semibold mb-4">Prompt-to-JSON Visualizer</h2>
-    <div x-data="{ input: '', output: '' }" class="space-y-4">
-      <textarea x-model="input" placeholder="Type your GPT prompt here..." class="w-full h-32 p-2 bg-gray-800 border border-gray-600 rounded"></textarea>
-      <button @click="output = JSON.stringify({ prompt: input }, null, 2)" class="bg-blue-600 px-4 py-2 rounded hover:bg-blue-800 transition">Visualize</button>
-      <pre class="bg-gray-900 p-4 rounded border border-gray-700 overflow-x-auto"><code x-text="output"></code></pre>
-    </div>
-  </section>
+    <main class="main-content">
+      <section id="prompt" class="tool-section">
+        <h1>Prompt Builder</h1>
+        <textarea placeholder="Write your prompt here..."></textarea>
+      </section>
 
-  <footer class="mt-20 text-center text-gray-500 text-sm">
-    Built by BreakingTheBot · Hosted free via GitHub Pages
-  </footer>
+      <section id="regex" class="tool-section hidden">
+        <h1>Regex Playground</h1>
+        <input type="text" placeholder="Enter regex">
+        <textarea placeholder="Test string"></textarea>
+      </section>
+
+      <section id="chatbot" class="tool-section hidden">
+        <h1>Chatbot Mockup</h1>
+        <div class="chat-window">
+          <div class="chat-log" id="chat-log"></div>
+          <input type="text" id="chat-input" placeholder="Say something...">
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/js/main.js"></script>
 </body>
 </html>
