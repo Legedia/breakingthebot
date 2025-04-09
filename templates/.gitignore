@@ -1,0 +1,44 @@
+# Node modules (if you later use npm)
+node_modules/
+
+# Python (if any backend or utils)
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+.env
+
+# VSCode workspace files
+.vscode/
+*.code-workspace
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+
+# Anaconda-related
+.conda/
+*.ipynb_checkpoints
+
+# Git & build artifacts
+dist/
+build/
+.cache/
+*.swp
+*.lock
+
+# Output from bundlers (optional)
+*.bundle.*
+*.map
+
+# Generated static site builds (if exporting for offline)
+public/
+output/
+site/
