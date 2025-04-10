@@ -6,6 +6,24 @@
     <title>Scientific Calculator</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="scientific_calculator.css">
+    <style>
+        .calculator {
+            width: 450px; /* Adjust width for better layout */
+        }
+
+        .buttons {
+            grid-template-columns: repeat(6, 1fr); /* More columns for scientific layout */
+        }
+
+        button {
+            padding: 10px; /* Adjust padding */
+            font-size: 0.9em; /* Adjust font size */
+        }
+
+        .zero {
+            grid-column: span 2;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -22,47 +40,47 @@
         <div class="calculator">
             <input type="text" id="display" class="display" readonly>
             <div class="buttons">
-                <button class="memory" onclick="memoryClear()">MC</button>
-                <button class="memory" onclick="memoryRecall()">MR</button>
-                <button class="memory" onclick="memoryAdd()">M+</button>
-                <button class="memory" onclick="memorySubtract()">M-</button>
+                <button class="function" onclick="memoryClear()">MC</button>
+                <button class="function" onclick="memoryRecall()">MR</button>
+                <button class="function" onclick="memoryAdd()">M+</button>
+                <button class="function" onclick="memorySubtract()">M-</button>
                 <button class="function" onclick="calculateSingleOperand('sin')">sin</button>
+                <button class="function" onclick="calculateSingleOperand('cos')">cos</button>
 
+                <button class="function" onclick="calculateSingleOperand('tan')">tan</button>
+                <button class="function" onclick="calculateSingleOperand('log')">log</button>
+                <button class="function" onclick="calculateSingleOperand('ln')">ln</button>
+                <button class="function" onclick="calculateSingleOperand('sqrt')">√</button>
+                <button class="function" onclick="calculateSingleOperand('x^2')">x²</button>
+                <button class="function" onclick="calculateSingleOperand('x^3')">x³</button>
+
+                <button class="function" onclick="calculateSingleOperand('1/x')">1/x</button>
+                <button class="function" onclick="calculateSingleOperand('e^x')">e^x</button>
+                <button class="function" onclick="calculateSingleOperand('10^x')">10^x</button>
+                <button class="function" onclick="calculateSingleOperand('!')">x!</button>
                 <button onclick="clearDisplay()">C</button>
                 <button onclick="deleteLast()">DEL</button>
-                <button class="operator" onclick="appendOperator('/')">/</button>
-                <button class="operator" onclick="appendOperator('*')">*</button>
-                <button class="function" onclick="calculateSingleOperand('cos')">cos</button>
 
                 <button onclick="appendNumber('7')">7</button>
                 <button onclick="appendNumber('8')">8</button>
                 <button onclick="appendNumber('9')">9</button>
-                <button class="operator" onclick="appendOperator('-')">-</button>
-                <button class="function" onclick="calculateSingleOperand('tan')">tan</button>
+                <button class="operator" onclick="appendOperator('/')">/</button>
+                <button class="operator" onclick="appendOperator('*')">*</button>
+                <button class="function" onclick="appendOperator('pow')">x^y</button>
 
                 <button onclick="appendNumber('4')">4</button>
                 <button onclick="appendNumber('5')">5</button>
                 <button onclick="appendNumber('6')">6</button>
+                <button class="operator" onclick="appendOperator('-')">-</button>
                 <button class="operator" onclick="appendOperator('+')">+</button>
-                <button class="function" onclick="calculateSingleOperand('log')">log</button>
+                <button class="equal" onclick="calculate()">=</button>
 
                 <button onclick="appendNumber('1')">1</button>
                 <button onclick="appendNumber('2')">2</button>
                 <button onclick="appendNumber('3')">3</button>
-                <button class="equal" onclick="calculate()">=</button>
-                <button class="function" onclick="calculateSingleOperand('ln')">ln</button>
-
                 <button onclick="appendNumber('0')" class="zero">0</button>
                 <button onclick="appendDecimal()">.</button>
-                <button class="function" onclick="calculateSingleOperand('sqrt')">√</button>
-                <button class="function" onclick="appendOperator('pow')">x^y</button>
-                <button class="function" onclick="calculateSingleOperand('!')">x!</button>
-
-                <button class="function" onclick="calculateSingleOperand('1/x')">1/x</button>
-                <button class="function" onclick="calculateSingleOperand('x^2')">x²</button>
-                <button class="function" onclick="calculateSingleOperand('x^3')">x³</button>
-                <button class="function" onclick="calculateSingleOperand('e^x')">e^x</button>
-                <button class="function" onclick="calculateSingleOperand('10^x')">10^x</button>
+                <div></div>
             </div>
         </div>
     </main>

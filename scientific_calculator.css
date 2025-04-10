@@ -1,7 +1,6 @@
 /* scientific_calculator.css */
 
 .calculator {
-    width: 400px; /* Increased width to accommodate more buttons */
     margin: 20px auto;
     background-color: #222; /* Darker background */
     border-radius: 8px;
@@ -24,7 +23,6 @@
 
 .buttons {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columns for more buttons */
     grid-gap: 8px;
 }
 
@@ -33,10 +31,9 @@ button {
     color: #aaffaa; /* Greenish text */
     border: none;
     border-radius: 5px;
-    padding: 12px; /* Slightly smaller padding */
-    font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-align: center; /* Center button text */
 }
 
 button:hover {
@@ -44,7 +41,7 @@ button:hover {
 }
 
 .zero {
-    grid-column: 1 / span 2;
+    /* Defined in the HTML style for layout */
 }
 
 .operator {
@@ -55,13 +52,13 @@ button:hover {
 .function {
     background-color: #555; /* Color for scientific functions */
     color: #bbf; /* Light blue for functions */
-    font-size: 0.9em; /* Slightly smaller font for functions */
+    font-size: 0.8em;
 }
 
 .memory {
     background-color: #777; /* Color for memory functions */
     color: #ffccff; /* Pinkish for memory */
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
 .equal {
@@ -74,7 +71,7 @@ button:hover {
 }
 
 /* Responsive CSS for scientific calculator */
-@media (max-width: 500px) {
+@media (max-width: 600px) {
     .calculator {
         width: 95%;
         margin: 10px auto;
@@ -91,7 +88,7 @@ button:hover {
 
     button {
         padding: 8px;
-        font-size: 0.8em;
+        font-size: 0.7em;
     }
 
     .zero {
