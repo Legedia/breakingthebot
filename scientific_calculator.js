@@ -1,54 +1,78 @@
 // scientific_calculator.js
 
+// Get the display element where the calculator output is shown
 let display = document.getElementById('display');
+// Variable to store the current number being entered by the user
 let currentInput = '';
+// Variable to store the selected operator (+, -, *, /, pow)
 let operator = null;
+// Variable to store the first operand in a calculation
 let firstOperand = null;
+// Variable to store the value in the calculator's memory
 let memory = 0;
 
+// Function to append a number to the current input
 function appendNumber(number) {
     currentInput += number;
     display.value = currentInput;
 }
 
+// Function to handle the selection of an operator
 function appendOperator(op) {
+    // If no input and no first operand, do nothing
     if (currentInput === '' && firstOperand === null) {
         return;
     }
+    // If there's a first operand already, perform the pending calculation
     if (firstOperand !== null) {
         calculate();
     }
+    // Store the current input as the first operand
     firstOperand = parseFloat(currentInput);
+    // Store the selected operator
     operator = op;
+    // Reset current input to prepare for the second operand
     currentInput = '';
 }
 
+// Function to append a decimal point to the current input
 function appendDecimal() {
+    // Only append if there isn't already a decimal point in the current input
     if (!currentInput.includes('.')) {
         currentInput += '.';
         display.value = currentInput;
     }
 }
 
+// Function to clear the display and reset all variables
 function clearDisplay() {
     currentInput = '';
     operator = null;
     firstOperand = null;
     display.value = '';
+    // Also clear the keyboard input field
+    document.getElementById('keyboardInput').value = '';
 }
 
+// Function to delete the last character from the current input
 function deleteLast() {
     currentInput = currentInput.slice(0, -1);
     display.value = currentInput;
+    // Also update the keyboard input field
+    document.getElementById('keyboardInput').value = currentInput;
 }
 
+// Function to perform the calculation when the equals button is pressed
 function calculate() {
+    // If no operator or first operand is set, do nothing
     if (operator === null || firstOperand === null) {
         return;
     }
+    // Parse the current input as the second operand
     let secondOperand = parseFloat(currentInput);
     let result;
 
+    // Perform the operation based on the stored operator
     switch (operator) {
         case '+':
             result = firstOperand + secondOperand;
@@ -60,6 +84,7 @@ function calculate() {
             result = firstOperand * secondOperand;
             break;
         case '/':
+            // Handle division by zero error
             if (secondOperand === 0) {
                 result = 'Error: Division by zero';
             } else {
@@ -73,21 +98,31 @@ function calculate() {
             return;
     }
 
+    // Display the result
     display.value = result;
+    // Update the keyboard input field
+    document.getElementById('keyboardInput').value = String(result);
+    // Set the result as the current input for potential further calculations
     currentInput = String(result);
+    // Reset operator and first operand
     operator = null;
     firstOperand = null;
 }
 
+// Function to perform calculations that involve a single operand (e.g., sin, cos, sqrt)
 function calculateSingleOperand(op) {
+    // If no input and no pending operator, do nothing
     if (currentInput === '' && operator === null) {
         return;
     }
+    // Use the current input as the operand, or the first operand if an operator is pending
     let operand = parseFloat(currentInput);
     if (operator !== null) {
         operand = firstOperand;
     }
     let result;
+
+    // Perform the single operand operation based on the button clicked
     switch (op) {
         case 'sin':
             result = Math.sin(operand);
@@ -99,6 +134,7 @@ function calculateSingleOperand(op) {
             result = Math.tan(operand);
             break;
         case 'log':
+            // Handle invalid input for logarithm
             if (operand <= 0) {
                 result = 'Error: Invalid input';
             } else {
@@ -106,6 +142,7 @@ function calculateSingleOperand(op) {
             }
             break;
         case 'ln':
+            // Handle invalid input for natural logarithm
             if (operand <= 0) {
                 result = 'Error: Invalid input';
             } else {
@@ -113,6 +150,7 @@ function calculateSingleOperand(op) {
             }
             break;
         case 'sqrt':
+            // Handle invalid input for square root
             if (operand < 0) {
                 result = 'Error: Invalid input';
             } else {
@@ -120,6 +158,7 @@ function calculateSingleOperand(op) {
             }
             break;
         case '1/x':
+            // Handle division by zero for reciprocal
             if (operand === 0) {
                 result = 'Error: Division by zero';
             } else {
@@ -139,6 +178,7 @@ function calculateSingleOperand(op) {
             result = Math.pow(10, operand);
             break;
         case '!':
+            // Handle invalid input for factorial
             if (operand < 0 || !Number.isInteger(operand)) {
                 result = 'Error: Invalid input';
             } else if (operand === 0) {
@@ -154,29 +194,40 @@ function calculateSingleOperand(op) {
         default:
             return;
     }
+    // Display the result
     display.value = result;
+    // Update the keyboard input field
+    document.getElementById('keyboardInput').value = String(result);
+    // Set the result as the current input
     currentInput = String(result);
+    // Reset operator and first operand
     firstOperand = null;
     operator = null;
 }
 
+// Function to recall the value stored in memory
 function memoryRecall() {
     currentInput = String(memory);
     display.value = currentInput;
+    // Update the keyboard input field
+    document.getElementById('keyboardInput').value = currentInput;
 }
 
+// Function to add the current input to the memory
 function memoryAdd() {
     if (currentInput !== '') {
         memory += parseFloat(currentInput);
     }
 }
 
+// Function to subtract the current input from the memory
 function memorySubtract() {
     if (currentInput !== '') {
         memory -= parseFloat(currentInput);
     }
 }
 
+// Function to clear the memory
 function memoryClear() {
     memory = 0;
 }

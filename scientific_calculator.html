@@ -3,32 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scientific Calculator</title>
+    <title>Scientific Calculator with Graphing</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="scientific_calculator.css">
     <style>
+        /* calculator.css */
         .calculator {
-            width: 450px; /* Adjust width for better layout */
+            width: 550px; /* Increased width to accommodate graph */
+            display: grid; /* Enable grid layout for the calculator */
+            grid-template-columns: 1fr 1fr; /* Two columns: calculator buttons and graph */
+            grid-template-rows: auto 1fr; /* Two rows: one for the input fields, one for buttons/graph */
+            gap: 15px; /* Spacing between grid items */
+        }
+
+        .display-container {
+            grid-column: 1 / 3; /* Span both columns for the input fields */
+        }
+
+        .display {
+            width: calc(100% - 20px); /* Full width minus padding */
+            padding: 15px;
+            margin-bottom: 5px; /* Space between the two input fields */
+            background-color: #333;
+            color: #aaffaa;
+            font-size: 1.5em;
+            text-align: right;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #keyboardInput {
+            font-size: 1.2em; /* Slightly smaller font for the keyboard input */
+            color: #ccffcc; /* Different color to distinguish */
         }
 
         .buttons {
-            grid-template-columns: repeat(6, 1fr); /* More columns for scientific layout */
+            grid-column: 1 / 2; /* Buttons occupy the first column */
+            display: grid; /* Enable grid layout for the buttons */
+            grid-template-columns: repeat(6, 1fr); /* Six columns for the button layout */
+            grid-gap: 8px; /* Spacing between buttons */
         }
 
         button {
-            padding: 10px; /* Adjust padding */
-            font-size: 0.9em; /* Adjust font size */
+            padding: 10px;
+            font-size: 0.9em;
+            background-color: #444;
+            color: #aaffaa;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        button:hover {
+            background-color: #555;
         }
 
         .zero {
-            grid-column: span 2;
+            grid-column: span 2; /* Make the zero button span two columns */
+        }
+
+        .operator {
+            background-color: #666;
+            color: #ccffcc;
+        }
+
+        .function {
+            background-color: #555;
+            color: #bbf;
+            font-size: 0.8em;
+        }
+
+        .memory {
+            background-color: #777;
+            color: #ffccff;
+            font-size: 0.7em;
+        }
+
+        .equal {
+            background-color: #aaffaa;
+            color: #222;
+        }
+
+        .equal:hover {
+            background-color: #bbffbb;
+        }
+
+        .graph-container {
+            grid-column: 2 / 3; /* Graph occupies the second column */
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #graphCanvas {
+            width: 90%;
+            height: 80%;
+            background-color: #444;
+        }
+
+        .graph-input {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .graph-input label {
+            color: #aaffaa;
+        }
+
+        .graph-input input[type="text"] {
+            background-color: #444;
+            color: #aaffaa;
+            border: none;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 0.9em;
+            width: 150px;
+        }
+
+        .graph-input button {
+            padding: 8px 15px;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>
-            Scientific Calculator
+            Scientific Calculator with Graphing
         </h1>
         <p>
             <a href="index.html" style="text-shadow: none;">
@@ -38,7 +148,11 @@
     </header>
     <main>
         <div class="calculator">
-            <input type="text" id="display" class="display" readonly>
+            <div class="display-container">
+                <input type="text" id="display" class="display" readonly>
+                <input type="text" id="keyboardInput" class="display" placeholder="Type here">
+            </div>
+
             <div class="buttons">
                 <button class="function" onclick="memoryClear()">MC</button>
                 <button class="function" onclick="memoryRecall()">MR</button>
@@ -80,7 +194,17 @@
                 <button onclick="appendNumber('3')">3</button>
                 <button onclick="appendNumber('0')" class="zero">0</button>
                 <button onclick="appendDecimal()">.</button>
-                <div></div>
+                <button class="function" onclick="plotGraph()">Graph</button>
+            </div>
+
+            <div class="graph-container">
+                <h3>Graph</h3>
+                <canvas id="graphCanvas"></canvas>
+                <div class="graph-input">
+                    <label for="functionInput">f(x) = </label>
+                    <input type="text" id="functionInput" placeholder="e.g., sin(x)">
+                    <button onclick="plotGraph()">Plot</button>
+                </div>
             </div>
         </div>
     </main>
@@ -89,6 +213,104 @@
             &copy; 2025 BreakingtheBot
         </p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="scientific_calculator.js"></script>
+    <script>
+        // Get references to the input and display elements
+        const keyboardInput = document.getElementById('keyboardInput');
+        const displayElement = document.getElementById('display');
+
+        // Event listener for typing in the keyboard input field
+        keyboardInput.addEventListener('input', () => {
+            // When the user types, update the main display and the current input variable
+            displayElement.value = keyboardInput.value;
+            currentInput = keyboardInput.value;
+        });
+
+        // Event listener for pressing keys in the keyboard input field
+        keyboardInput.addEventListener('keydown', (event) => {
+            // If the pressed key is 'Enter'
+            if (event.key === 'Enter') {
+                try {
+                    // Attempt to evaluate the current input as a JavaScript expression
+                    const result = eval(currentInput); // Be cautious with eval() as it can be risky with untrusted input
+                    // Display the result
+                    displayElement.value = result;
+                    // Update the current input and reset operator and first operand
+                    currentInput = String(result);
+                    firstOperand = null;
+                    operator = null;
+                } catch (error) {
+                    // If there's an error during evaluation (e.g., invalid syntax)
+                    displayElement.value = 'Error';
+                }
+            }
+        });
+
+        // Function to plot a graph on the canvas
+        function plotGraph() {
+            // Get the canvas element and its 2D rendering context
+            const canvas = document.getElementById('graphCanvas');
+            const ctx = canvas.getContext('2d');
+            // Get the function input from the user
+            const functionInput = document.getElementById('functionInput').value;
+            // Prepare the expression for evaluation by replacing math function names with Math object methods
+            const expression = functionInput.replace(/sin|cos|tan|log|ln|sqrt|abs|pow|exp/g, (match) => `Math.${match}`);
+
+            try {
+                // Create an array to store the points of the graph
+                const points = [];
+                // Iterate through x values from -10 to 10 with a small step for smoothness
+                for (let x = -10; x <= 10; x += 0.1) {
+                    // Evaluate the expression for the current x value
+                    const y = eval(expression.replace(/x/g, x));
+                    // Add the point to the array
+                    points.push({ x: x, y: y });
+                }
+
+                // Create a new Chart.js chart
+                new Chart(ctx, {
+                    type: 'line', // Use a line chart for plotting functions
+                    data: {
+                        datasets: [{
+                            label: functionInput || 'f(x)', // Label for the graph
+                            data: points, // The data points
+                            borderColor: '#00ffff', // Color of the line
+                            fill: false, // Do not fill the area under the line
+                            pointRadius: 0, // Do not display points
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'linear', // Linear scale for the x-axis
+                                position: 'bottom',
+                                title: {
+                                    display: true,
+                                    text: 'x' // Label for the x-axis
+                                }
+                            },
+                            y: {
+                                type: 'linear', // Linear scale for the y-axis
+                                position: 'left',
+                                title: {
+                                    display: true,
+                                    text: 'y' // Label for the y-axis
+                                }
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                // If there's an error in the function input
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+                ctx.fillStyle = '#ffaaaa'; // Set fill color for error message
+                ctx.font = '16px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Invalid Function', canvas.width / 2, canvas.height / 2); // Display error message
+                console.error("Graphing error:", error); // Log the error to the console
+            }
+        }
+    </script>
 </body>
 </html>
