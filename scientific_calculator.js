@@ -2,12 +2,16 @@
 
 // Get the display element where the calculator output is shown
 let display = document.getElementById('display');
+
 // Variable to store the current number being entered by the user
 let currentInput = '';
+
 // Variable to store the selected operator (+, -, *, /, pow)
 let operator = null;
+
 // Variable to store the first operand in a calculation
 let firstOperand = null;
+
 // Variable to store the value in the calculator's memory
 let memory = 0;
 
