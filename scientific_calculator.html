@@ -6,103 +6,6 @@
   <title>Scientific Calculator</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="scientific_calculator.css">
-  <style>
-   /* calculator.css - Adjusted for Unit Conversion */
-   .calculator {
-    width: 450px; /* Adjusted width */
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr auto; /* Added row for unit conversion */
-    gap: 10px;
-    padding: 15px;
-    background-color: #222;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
-   }
-
-   .display-container {
-    grid-column: 1 / 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-   }
-
-   .display {
-    width: calc(100% - 20px);
-    padding: 10px;
-    background-color: #333;
-    color: #aaffaa;
-    font-size: 1.4em;
-    text-align: right;
-    border: none;
-    border-radius: 5px;
-    box-sizing: border-box;
-   }
-
-   #keyboardInput {
-    font-size: 1.1em;
-    color: #ccffcc;
-    padding: 8px;
-   }
-
-   .buttons {
-    grid-column: 1 / 1;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 8px;
-   }
-
-   button {
-    padding: 8px;
-    font-size: 0.9em;
-    position: relative; /* For tooltip positioning */
-   }
-
-   button .tooltip {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -60px;
-    opacity: 0;
-    transition: opacity 0.3s;
-   }
-
-   button:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-   }
-
-   .unit-conversion-container {
-    grid-column: 1 / 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 5px;
-    padding: 10px;
-    background-color: #333;
-    border-radius: 5px;
-    color: #bbf;
-    font-size: 0.8em;
-   }
-
-   .unit-conversion-container select,
-   .unit-conversion-container input,
-   .unit-conversion-container div {
-    background-color: #444;
-    color: #aaffaa;
-    border: none;
-    border-radius: 3px;
-    padding: 5px;
-    font-size: 0.8em;
-   }
-  </style>
  </head>
  <body>
   <header>
@@ -121,7 +24,6 @@
      <input type="text" id="display" class="display" readonly placeholder="Calculator Output">
      <input type="text" id="keyboardInput" class="display" placeholder="Type calculator input here">
     </div>
-
     <div class="buttons">
      <button class="function" onclick="memoryClear()">MC
       <span class="tooltip">Memory Clear</span>
@@ -141,7 +43,6 @@
      <button class="function" onclick="calculateSingleOperand('cos')">cos
       <span class="tooltip">Cosine</span>
      </button>
-
      <button class="function" onclick="calculateSingleOperand('tan')">tan
       <span class="tooltip">Tangent</span>
      </button>
@@ -160,7 +61,6 @@
      <button class="function" onclick="calculateSingleOperand('x^3')">x³
       <span class="tooltip">Cube</span>
      </button>
-
      <button class="function" onclick="calculateSingleOperand('1/x')">1/x
       <span class="tooltip">Reciprocal</span>
      </button>
@@ -179,7 +79,6 @@
      <button onclick="deleteLast()">DEL
       <span class="tooltip">Delete</span>
      </button>
-
      <button onclick="appendNumber('7')">7
       <span class="tooltip">Seven</span>
      </button>
@@ -198,7 +97,6 @@
      <button class="function" onclick="appendOperator('pow')">x^y
       <span class="tooltip">Power</span>
      </button>
-
      <button onclick="appendNumber('4')">4
       <span class="tooltip">Four</span>
      </button>
@@ -217,7 +115,6 @@
      <button class="equal" onclick="calculate()">=
       <span class="tooltip">Equals</span>
      </button>
-
      <button onclick="appendNumber('1')">1
       <span class="tooltip">One</span>
      </button>
@@ -237,7 +134,6 @@
       <span class="tooltip">Open Graphing Tool</span>
      </button>
     </div>
-
     <div class="unit-conversion-container">
      <select id="unitType" onchange="populateUnits()">
       <option value="">Select Type</option>
@@ -249,6 +145,7 @@
      <select id="fromUnit"></select>
      <input type="text" id="inputValue" placeholder="Value">
      <select id="toUnit"></select>
+     <button onclick="displayConversionResult()">Convert</button>
      <div id="result"></div>
     </div>
    </div>

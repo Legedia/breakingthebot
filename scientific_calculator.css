@@ -10,14 +10,12 @@
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
    }
-  
    .display-container {
     grid-column: 1 / 1;
     display: flex;
     flex-direction: column;
     gap: 5px;
    }
-  
    .display {
     width: calc(100% - 20px);
     padding: 10px;
@@ -29,26 +27,22 @@
     border-radius: 5px;
     box-sizing: border-box;
    }
-  
    #keyboardInput {
     font-size: 1.1em;
     color: #ccffcc;
     padding: 8px;
    }
-  
    .buttons {
     grid-column: 1 / 1;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 8px;
    }
-  
    button {
     padding: 8px;
     font-size: 0.9em;
     position: relative;
    }
-  
    button .tooltip {
     visibility: hidden;
     width: 120px;
@@ -65,26 +59,26 @@
     opacity: 0;
     transition: opacity 0.3s;
    }
-  
    button:hover .tooltip {
     visibility: visible;
     opacity: 1;
    }
-  
    .unit-conversion-container {
     grid-column: 1 / 1;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
     grid-gap: 5px;
     padding: 10px;
     background-color: #333;
     border-radius: 5px;
     color: #bbf;
     font-size: 0.8em;
+    align-items: center;
    }
-  
    .unit-conversion-container select,
    .unit-conversion-container input,
+   .unit-conversion-container button,
    .unit-conversion-container div {
     background-color: #444;
     color: #aaffaa;
@@ -92,4 +86,10 @@
     border-radius: 3px;
     padding: 5px;
     font-size: 0.8em;
+    height: 30px;
+    box-sizing: border-box;
+   }
+   #result {
+    grid-column: 1 / 6;
+    text-align: center;
    }
