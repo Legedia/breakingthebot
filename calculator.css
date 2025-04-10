@@ -1,4 +1,4 @@
-/* interactive-builds/simple-calculator/calculator.css */
+/* calculator.css */
 
 .calculator {
     width: 300px;
@@ -59,7 +59,7 @@ button:hover {
 /* Responsive CSS for calculator */
 @media (max-width: 400px) {
     .calculator {
-        width: 95%; /* Make calculator wider on smaller screens */
+        width: 95%;
         margin: 10px auto;
     }
 

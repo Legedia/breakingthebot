@@ -1,17 +1,21 @@
-// interactive-builds/simple-calculator/calculator.js
+// calculator.js
 
 let display = document.getElementById('display');
 let currentInput = '';
 let operator = null;
 let firstOperand = null;
 
+
 function appendNumber(number) {
     currentInput += number;
     display.value = currentInput;
 }
 
+
 function appendOperator(op) {
-    if (currentInput === '' && firstOperand === null) return;
+    if (currentInput === '' && firstOperand === null) {
+        return;
+    }
     if (firstOperand !== null) {
         calculate();
     }
@@ -20,12 +24,14 @@ function appendOperator(op) {
     currentInput = '';
 }
 
+
 function appendDecimal() {
     if (!currentInput.includes('.')) {
         currentInput += '.';
         display.value = currentInput;
     }
 }
+
 
 function clearDisplay() {
     currentInput = '';
@@ -34,15 +40,20 @@ function clearDisplay() {
     display.value = '';
 }
 
+
 function deleteLast() {
     currentInput = currentInput.slice(0, -1);
     display.value = currentInput;
 }
 
+
 function calculate() {
-    if (operator === null || firstOperand === null) return;
+    if (operator === null || firstOperand === null) {
+        return;
+    }
     let secondOperand = parseFloat(currentInput);
     let result;
+
     switch (operator) {
         case '+':
             result = firstOperand + secondOperand;
@@ -63,6 +74,7 @@ function calculate() {
         default:
             return;
     }
+
     display.value = result;
     currentInput = String(result);
     operator = null;

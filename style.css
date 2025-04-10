@@ -2,20 +2,20 @@
 
 body {
   font-family: sans-serif;
-  margin: 0; /* Remove default body margin for full background */
-  background-color: #28426c; /* Your dark blue background */
-  color: #00ffff; /* Your cyan font color */
+  margin: 0;
+  background-color: #28426c;
+  color: #00ffff;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+  min-height: 100vh;
 }
 
 header {
-  background-image: linear-gradient(to bottom, rgba(40, 66, 108, 0.8), transparent); /* Subtle gradient */
+  background-image: linear-gradient(to bottom, rgba(40, 66, 108, 0.8), transparent);
   color: #00ffff;
   padding: 2em;
   text-align: center;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); /* Subtle glow around header */
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
 nav ul {
@@ -33,38 +33,38 @@ nav ul li {
 nav a {
   color: #00ffff;
   text-decoration: none;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); /* Glow on links */
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
 }
 
 main {
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.1); /* Slightly transparent background for content area */
+  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  margin: 20px auto; /* Center the main content */
-  max-width: 800px; /* Limit the width of the main content */
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2); /* Glow around main content */
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
 }
 
 section {
   margin-bottom: 2em;
   padding: 1em;
   border-radius: 5px;
-  background-image: linear-gradient(to right, rgba(0, 255, 255, 0.05), transparent); /* Subtle gradient on sections */
+  background-image: linear-gradient(to right, rgba(0, 255, 255, 0.05), transparent);
 }
 
 h1 {
-  text-shadow: 0 0 8px #00ffff; /* Stronger glow on the main heading */
-  animation: breakingBotBlink 2s infinite alternate; /* Apply the blinking animation */
+  text-shadow: 0 0 8px #00ffff;
+  animation: breakingBotBlink 2s infinite alternate;
 }
 
 h2 {
   color: #00ffff;
-  text-shadow: 0 0 6px rgba(0, 255, 255, 0.4); /* Glow on section headings */
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.4);
 }
 
 p {
   line-height: 1.6;
-  text-shadow: 0 0 3px rgba(0, 255, 255, 0.2); /* Subtle glow on paragraphs */
+  text-shadow: 0 0 3px rgba(0, 255, 255, 0.2);
 }
 
 ul {
@@ -79,39 +79,42 @@ ul li {
 ul li a {
   color: #00ffff;
   text-decoration: none;
-  text-shadow: 0 0 4px rgba(0, 255, 255, 0.3); /* Glow on list links */
+  text-shadow: 0 0 4px rgba(0, 255, 255, 0.3);
 }
 
 footer {
   text-align: center;
   padding: 1em 0;
   color: #00ffff;
-  background-color: rgba(40, 66, 108, 0.5); /* Semi-transparent footer background */
-  margin-top: auto; /* Push footer to the bottom */
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); /* Subtle glow around footer */
+  background-color: rgba(40, 66, 108, 0.5);
+  margin-top: auto;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
-/* Blinking animation for BreakingtheBot text */
 @keyframes breakingBotBlink {
-  from { opacity: 1; }
-  to { opacity: 0.7; }
+  from {
+      opacity: 1;
+  }
+
+  to {
+      opacity: 0.7;
+  }
 }
 
-/* Style for the profile image */
 .profile-image {
-  width: 150px; /* Adjust size as needed */
+  width: 150px;
   height: auto;
-  border-radius: 50%; /* Make it circular */
+  border-radius: 50%;
   border: 2px solid #00ffff;
   box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
-  margin: 1em auto; /* Center the image with some top/bottom margin */
-  display: block; /* To allow centering with margin: auto */
+  margin: 1em auto;
+  display: block;
 }
 
-/* Responsive CSS */
 @media (max-width: 600px) {
+
   body {
-      margin: 0; /* Adjust margins for smaller screens */
+      margin: 0;
       padding: 0;
   }
 
@@ -120,7 +123,7 @@ footer {
   }
 
   h1 {
-      font-size: 2em; /* Smaller heading for smaller screens */
+      font-size: 2em;
   }
 
   h2 {
@@ -128,7 +131,7 @@ footer {
   }
 
   nav ul {
-      flex-direction: column; /* Stack navigation links on smaller screens */
+      flex-direction: column;
       align-items: center;
   }
 
@@ -137,11 +140,11 @@ footer {
   }
 
   main {
-      margin: 10px; /* Adjust main margin */
+      margin: 10px;
       padding: 15px;
   }
 
   .profile-image {
-      width: 100px; /* Smaller profile image */
+      width: 100px;
   }
 }
