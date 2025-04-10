@@ -5,13 +5,20 @@ function plotGraph() {
     const functionInput = document.getElementById('functionInput').value;
     try {
      const points = [];
+     let minY = Infinity;
+     let maxY = -Infinity;
      for (let x = -10; x <= 10; x += 0.1) {
       let y = eval(functionInput.replace(/x/g, x));
-      if (typeof y !== 'number' || isNaN(y) || !isFinite(y)) {
-       y = null;
+      if (typeof y === 'number' && isFinite(y)) {
+       points.push({ x: x, y: y });
+       minY = Math.min(minY, y);
+       maxY = Math.max(maxY, y);
       }
-      points.push({ x: x, y: y });
      }
+     // Adjust y-axis range if needed
+     const yPadding = Math.max(1, (maxY - minY) * 0.1); // 10% padding
+     const suggestedMinY = minY - yPadding;
+     const suggestedMaxY = maxY + yPadding;
      new Chart(ctx, {
       type: 'line',
       data: {
@@ -49,10 +56,10 @@ function plotGraph() {
          grid: {
           color: '#555'
          },
-         ticks: { // Added y-axis scaling
+         ticks: {
           beginAtZero: true,
-          suggestedMin: -10,
-          suggestedMax: 10
+          suggestedMin: suggestedMinY, // Dynamic y-axis range
+          suggestedMax: suggestedMaxY
          }
         }
        },

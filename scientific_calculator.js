@@ -14,24 +14,23 @@
   currentInput += number;
   display.value = currentInput;
  }
- // Function to handle the selection of an operator
+ // Function to handle operator selection
  function appendOperator(op) {
-  // If no input and no first operand, do nothing
-  if (currentInput === '' && firstOperand === null) {
-   return;
-  }
-  // If there's a first operand already, perform the pending calculation
-  if (firstOperand !== null) {
-   calculate();
-  }
-  // Store the current input as the first operand
-  firstOperand = parseFloat(currentInput);
-  // Store the selected operator
-  operator = op;
-  // Reset current input to prepare for the second operand
-  currentInput = '';
- }
- // Function to append a decimal point to the current input
+    // If no input and no first operand, do nothing
+    if (currentInput === '' && firstOperand === null) {
+     return;
+    }
+    // If there's a first operand already, perform the pending calculation
+    if (firstOperand !== null && operator !== null) { // Added operator check
+     calculate();
+    }
+    // Store the current input as the first operand
+    firstOperand = parseFloat(currentInput);
+    // Store the selected operator
+    operator = op;
+    // Reset current input to prepare for the second operand
+    currentInput = '';
+   }
  function appendDecimal() {
   // Only append if there isn't already a decimal point in the current input
   if (!currentInput.includes('.')) {
