@@ -1,4 +1,4 @@
-/* calculator.css - Adjusted for Unit Conversion */
+/* calculator.css - Adjusted for Unit Conversion and Colors */
 .calculator {
     width: 450px;
     display: grid;
@@ -38,10 +38,32 @@
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 8px;
    }
-   button {
+   .buttons button { /* More specific selector */
     padding: 8px;
     font-size: 0.9em;
     position: relative;
+    background-color: #444; /* Default button color */
+    color: #aaffaa;
+   }
+   .buttons button:hover {
+    background-color: #555;
+   }
+   .buttons .operator { /* Operator button color */
+    background-color: #666;
+    color: #ccffcc;
+   }
+   .buttons .equal { /* Equal button color */
+    background-color: #aaffaa;
+    color: #222;
+   }
+   .buttons .function { /* Function button color */
+    background-color: #555;
+    color: #bbf;
+   }
+   .buttons .memory { /* Memory button color */
+    background-color: #777;
+    color: #ffccff;
+    font-size: 0.7em;
    }
    button .tooltip {
     visibility: hidden;
