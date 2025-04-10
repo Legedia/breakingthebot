@@ -9,132 +9,55 @@
  </head>
  <body>
   <header>
-   <h1>
-    Scientific Calculator
-   </h1>
+   <h1>Scientific Calculator</h1>
    <p>
-    <a href="index.html" style="text-shadow: none;">
-     Back to Main Page
-    </a>
+    <a href="index.html" style="text-shadow: none;">Back to Main Page</a>
    </p>
   </header>
   <main>
-   <div class="calculator">
+   <section class="calculator">
     <div class="display-container">
      <input type="text" id="display" class="display" readonly placeholder="Calculator Output">
-     <input type="text" id="keyboardInput" class="display" placeholder="Type calculator input here">
     </div>
     <div class="buttons">
-     <button class="function" onclick="memoryClear()">MC
-      <span class="tooltip">Memory Clear</span>
-     </button>
-     <button class="function" onclick="memoryRecall()">MR
-      <span class="tooltip">Memory Recall</span>
-     </button>
-     <button class="function" onclick="memoryAdd()">M+
-      <span class="tooltip">Memory Add</span>
-     </button>
-     <button class="function" onclick="memorySubtract()">M-
-      <span class="tooltip">Memory Subtract</span>
-     </button>
-     <button class="function" onclick="calculateSingleOperand('sin')">sin
-      <span class="tooltip">Sine</span>
-     </button>
-     <button class="function" onclick="calculateSingleOperand('cos')">cos
-      <span class="tooltip">Cosine</span>
-     </button>
-     <button class="function" onclick="calculateSingleOperand('tan')">tan
-      <span class="tooltip">Tangent</span>
-     </button>
-     <button class="function" onclick="calculateSingleOperand('log')">log
-      <span class="tooltip">Logarithm (base 10)</span>
-     </button>
-     <button class="function" onclick="calculateSingleOperand('ln')">ln
-      <span class="tooltip">Natural Logarithm</span>
-     </button>
-     <button class="function" onclick="calculateSingleOperand('sqrt')">√
-      <span class="tooltip">Square Root</span>
-     </button>
-     <button class="function" onclick="calculateSingleOperand('x^2')">x²
-      <span class="tooltip">Square</span>
-     </button>
-     <button class="function" onclick="calculateSingleOperand('x^3')">x³
-      <span class="tooltip">Cube</span>
-     </button>
-     <button class="function" onclick="calculateSingleOperand('1/x')">1/x
-      <span class="tooltip">Reciprocal</span>
-     </button>
-     <button class="function" onclick="calculateSingleOperand('e^x')">e^x
-      <span class="tooltip">Exponential (e^x)</span>
-     </button>
-     <button class="function" onclick="calculateSingleOperand('10^x')">10^x
-      <span class="tooltip">10 to the power of x</span>
-     </button>
-     <button class="function" onclick="calculateSingleOperand('!')">x!
-      <span class="tooltip">Factorial</span>
-     </button>
-     <button onclick="clearDisplay()">C
-      <span class="tooltip">Clear</span>
-     </button>
-     <button onclick="deleteLast()">DEL
-      <span class="tooltip">Delete</span>
-     </button>
-     <button onclick="appendNumber('7')">7
-      <span class="tooltip">Seven</span>
-     </button>
-     <button onclick="appendNumber('8')">8
-      <span class="tooltip">Eight</span>
-     </button>
-     <button onclick="appendNumber('9')">9
-      <span class="tooltip">Nine</span>
-     </button>
-     <button class="operator" onclick="appendOperator('/')">/
-      <span class="tooltip">Divide</span>
-     </button>
-     <button class="operator" onclick="appendOperator('*')">*
-      <span class="tooltip">Multiply</span>
-     </button>
-     <button class="function" onclick="appendOperator('pow')">x^y
-      <span class="tooltip">Power</span>
-     </button>
-     <button onclick="appendNumber('4')">4
-      <span class="tooltip">Four</span>
-     </button>
-     <button onclick="appendNumber('5')">5
-      <span class="tooltip">Five</span>
-     </button>
-     <button onclick="appendNumber('6')">6
-      <span class="tooltip">Six</span>
-     </button>
-     <button class="operator" onclick="appendOperator('-')">-
-      <span class="tooltip">Subtract</span>
-     </button>
-     <button class="operator" onclick="appendOperator('+')">+
-      <span class="tooltip">Add</span>
-     </button>
-     <button class="equal" onclick="calculate()">=
-      <span class="tooltip">Equals</span>
-     </button>
-     <button onclick="appendNumber('1')">1
-      <span class="tooltip">One</span>
-     </button>
-     <button onclick="appendNumber('2')">2
-      <span class="tooltip">Two</span>
-     </button>
-     <button onclick="appendNumber('3')">3
-      <span class="tooltip">Three</span>
-     </button>
-     <button onclick="appendNumber('0')" class="zero">0
-      <span class="tooltip">Zero</span>
-     </button>
-     <button onclick="appendDecimal()">.
-      <span class="tooltip">Decimal</span>
-     </button>
-     <button onclick="openGraphWindow()">Graph
-      <span class="tooltip">Open Graphing Tool</span>
-     </button>
+     <button class="function" onclick="memoryClear()">MC<span class="tooltip">Memory Clear</span></button>
+     <button class="function" onclick="memoryRecall()">MR<span class="tooltip">Memory Recall</span></button>
+     <button class="function" onclick="memoryAdd()">M+<span class="tooltip">Memory Add</span></button>
+     <button class="function" onclick="memorySubtract()">M-<span class="tooltip">Memory Subtract</span></button>
+     <button class="function" onclick="calculateSingleOperand('sin')">sin<span class="tooltip">Sine</span></button>
+     <button class="function" onclick="calculateSingleOperand('cos')">cos<span class="tooltip">Cosine</span></button>
+     <button class="function" onclick="calculateSingleOperand('tan')">tan<span class="tooltip">Tangent</span></button>
+     <button class="function" onclick="calculateSingleOperand('log')">log<span class="tooltip">Logarithm (base 10)</span></button>
+     <button class="function" onclick="calculateSingleOperand('ln')">ln<span class="tooltip">Natural Logarithm</span></button>
+     <button class="function" onclick="calculateSingleOperand('sqrt')">√<span class="tooltip">Square Root</span></button>
+     <button class="function" onclick="calculateSingleOperand('x^2')">x²<span class="tooltip">Square</span></button>
+     <button class="function" onclick="calculateSingleOperand('x^3')">x³<span class="tooltip">Cube</span></button>
+     <button class="function" onclick="calculateSingleOperand('1/x')">1/x<span class="tooltip">Reciprocal</span></button>
+     <button class="function" onclick="calculateSingleOperand('e^x')">e^x<span class="tooltip">Exponential (e^x)</span></button>
+     <button class="function" onclick="calculateSingleOperand('10^x')">10^x<span class="tooltip">10 to the power of x</span></button>
+     <button class="function" onclick="calculateSingleOperand('!')">x!<span class="tooltip">Factorial</span></button>
+     <button onclick="clearDisplay()">C<span class="tooltip">Clear</span></button>
+     <button onclick="deleteLast()">DEL<span class="tooltip">Delete</span></button>
+     <button onclick="appendNumber('7')">7<span class="tooltip">Seven</span></button>
+     <button onclick="appendNumber('8')">8<span class="tooltip">Eight</span></button>
+     <button onclick="appendNumber('9')">9<span class="tooltip">Nine</span></button>
+     <button class="operator" onclick="appendOperator('/')">/<span class="tooltip">Divide</span></button>
+     <button class="operator" onclick="appendOperator('*')">*<span class="tooltip">Multiply</span></button>
+     <button class="function" onclick="appendOperator('pow')">x^y<span class="tooltip">Power</span></button>
+     <button onclick="appendNumber('4')">4<span class="tooltip">Four</span></button>
+     <button onclick="appendNumber('5')">5<span class="tooltip">Five</span></button>
+     <button onclick="appendNumber('6')">6<span class="tooltip">Six</span></button>
+     <button class="operator" onclick="appendOperator('-')">-<span class="tooltip">Subtract</span></button>
+     <button class="operator" onclick="appendOperator('+')">+<span class="tooltip">Add</span></button>
+     <button class="equal" onclick="calculate()">=<span class="tooltip">Equals</span></button>
+     <button onclick="appendNumber('1')">1<span class="tooltip">One</span></button>
+     <button onclick="appendNumber('2')">2<span class="tooltip">Two</span></button>
+     <button onclick="appendNumber('3')">3<span class="tooltip">Three</span></button>
+     <button onclick="appendNumber('0')" class="zero">0<span class="tooltip">Zero</span></button>
+     <button onclick="appendDecimal()">.<span class="tooltip">Decimal</span></button>
+     <button onclick="openGraphWindow()">Graph<span class="tooltip">Open Graphing Tool</span></button>
     </div>
-    <div class="unit-conversion-container">
+    <section class="unit-conversion-container">
      <select id="unitType" onchange="populateUnits()">
       <option value="">Select Type</option>
       <option value="length">Length</option>
@@ -147,13 +70,11 @@
      <select id="toUnit"></select>
      <button onclick="displayConversionResult()">Convert</button>
      <div id="result"></div>
-    </div>
-   </div>
+    </section>
+   </section>
   </main>
   <footer>
-   <p>
-    &copy; 2025 BreakingtheBot
-   </p>
+   <p>&copy; 2025 BreakingtheBot</p>
   </footer>
   <script src="scientific_calculator.js"></script>
  </body>

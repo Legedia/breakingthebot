@@ -1,13 +1,13 @@
 // scientific_calculator.js
  // Get the display element where the calculator output is shown
  let display = document.getElementById('display');
- // Variable to store the current number being entered by the user
+ // Variable to store the current number being entered
  let currentInput = '';
  // Variable to store the selected operator (+, -, *, /, pow)
  let operator = null;
- // Variable to store the first operand in a calculation
+ // Variable to store the first operand
  let firstOperand = null;
- // Variable to store the value in the calculator's memory
+ // Variable to store the value in memory
  let memory = 0;
  // Function to append a number to the current input
  function appendNumber(number) {
@@ -16,54 +16,42 @@
  }
  // Function to handle operator selection
  function appendOperator(op) {
-    // If no input and no first operand, do nothing
-    if (currentInput === '' && firstOperand === null) {
-     return;
-    }
-    // If there's a first operand already, perform the pending calculation
-    if (firstOperand !== null && operator !== null) { // Added operator check
-     calculate();
-    }
-    // Store the current input as the first operand
-    firstOperand = parseFloat(currentInput);
-    // Store the selected operator
-    operator = op;
-    // Reset current input to prepare for the second operand
-    currentInput = '';
-   }
+  if (currentInput === '' && firstOperand === null) {
+   return;
+  }
+  if (firstOperand !== null && operator !== null) {
+   calculate();
+  }
+  firstOperand = parseFloat(currentInput);
+  operator = op;
+  currentInput = '';
+ }
+ // Function to append a decimal point
  function appendDecimal() {
-  // Only append if there isn't already a decimal point in the current input
   if (!currentInput.includes('.')) {
    currentInput += '.';
    display.value = currentInput;
   }
  }
- // Function to clear the display and reset all variables
+ // Function to clear the display
  function clearDisplay() {
   currentInput = '';
   operator = null;
   firstOperand = null;
   display.value = '';
-  // Also clear the keyboard input field
-  document.getElementById('keyboardInput').value = '';
  }
- // Function to delete the last character from the current input
+ // Function to delete the last character
  function deleteLast() {
   currentInput = currentInput.slice(0, -1);
   display.value = currentInput;
-  // Also update the keyboard input field
-  document.getElementById('keyboardInput').value = currentInput;
  }
- // Function to perform the calculation when the equals button is pressed
+ // Function to perform calculations
  function calculate() {
-  // If no operator or first operand is set, do nothing
   if (operator === null || firstOperand === null) {
    return;
   }
-  // Parse the current input as the second operand
   let secondOperand = parseFloat(currentInput);
   let result;
-  // Perform the operation based on the stored operator
   switch (operator) {
    case '+':
     result = firstOperand + secondOperand;
@@ -75,7 +63,6 @@
     result = firstOperand * secondOperand;
     break;
    case '/':
-    // Handle division by zero error
     if (secondOperand === 0) {
      result = 'Error: Division by zero';
     } else {
@@ -88,29 +75,18 @@
    default:
     return;
   }
-  // Display the result
   display.value = result;
-  // Update the keyboard input field
-  document.getElementById('keyboardInput').value = String(result);
-  // Set the result as the current input for potential further calculations
   currentInput = String(result);
-  // Reset operator and first operand
   operator = null;
   firstOperand = null;
  }
- // Function to perform calculations that involve a single operand (e.g., sin, cos, sqrt)
+ // Function for single-operand calculations (sin, cos, etc.)
  function calculateSingleOperand(op) {
-  // If no input and no pending operator, do nothing
-  if (currentInput === '' && operator === null) {
+  if (currentInput === '') {
    return;
   }
-  // Use the current input as the operand, or the first operand if an operator is pending
   let operand = parseFloat(currentInput);
-  if (operator !== null) {
-   operand = firstOperand;
-  }
   let result;
-  // Perform the single operand operation based on the button clicked
   switch (op) {
    case 'sin':
     result = Math.sin(operand);
@@ -122,7 +98,6 @@
     result = Math.tan(operand);
     break;
    case 'log':
-    // Handle invalid input for logarithm
     if (operand <= 0) {
      result = 'Error: Invalid input';
     } else {
@@ -130,7 +105,6 @@
     }
     break;
    case 'ln':
-    // Handle invalid input for natural logarithm
     if (operand <= 0) {
      result = 'Error: Invalid input';
     } else {
@@ -138,7 +112,6 @@
     }
     break;
    case 'sqrt':
-    // Handle invalid input for square root
     if (operand < 0) {
      result = 'Error: Invalid input';
     } else {
@@ -146,7 +119,6 @@
     }
     break;
    case '1/x':
-    // Handle division by zero for reciprocal
     if (operand === 0) {
      result = 'Error: Division by zero';
     } else {
@@ -166,7 +138,6 @@
     result = Math.pow(10, operand);
     break;
    case '!':
-    // Handle invalid input for factorial
     if (operand < 0 || !Number.isInteger(operand)) {
      result = 'Error: Invalid input';
     } else if (operand === 0) {
@@ -182,36 +153,29 @@
    default:
     return;
   }
-  // Display the result
   display.value = result;
-  // Update the keyboard input field
-  document.getElementById('keyboardInput').value = String(result);
-  // Set the result as the current input
   currentInput = String(result);
-  // Reset operator and first operand
   firstOperand = null;
   operator = null;
  }
- // Function to recall the value stored in memory
+ // Function to recall memory
  function memoryRecall() {
   currentInput = String(memory);
   display.value = currentInput;
-  // Update the keyboard input field
-  document.getElementById('keyboardInput').value = currentInput;
  }
- // Function to add the current input to the memory
+ // Function to add to memory
  function memoryAdd() {
   if (currentInput !== '') {
    memory += parseFloat(currentInput);
   }
  }
- // Function to subtract the current input from the memory
+ // Function to subtract from memory
  function memorySubtract() {
   if (currentInput !== '') {
    memory -= parseFloat(currentInput);
   }
  }
- // Function to clear the memory
+ // Function to clear memory
  function memoryClear() {
   memory = 0;
  }
@@ -220,16 +184,14 @@
   window.open('graph.html', '_blank', 'width=800,height=600');
  }
  // Unit Conversion Functions
- // Function to populate the unit dropdowns based on the selected unit type
+ // Function to populate unit dropdowns
  function populateUnits() {
   const unitType = document.getElementById('unitType').value;
   const fromUnitSelect = document.getElementById('fromUnit');
   const toUnitSelect = document.getElementById('toUnit');
-  // Clear previous options
   fromUnitSelect.innerHTML = '';
   toUnitSelect.innerHTML = '';
   let units = [];
-  // Populate units based on the selected type
   switch (unitType) {
    case 'length':
     units = ['m', 'cm', 'mm', 'km', 'in', 'ft', 'yd', 'mi'];
@@ -244,7 +206,6 @@
     units = ['C', 'F', 'K'];
     break;
   }
-  // Add options to the select elements
   units.forEach(unit => {
    const option1 = document.createElement('option');
    option1.value = unit;
@@ -256,23 +217,21 @@
    toUnitSelect.appendChild(option2);
   });
  }
- // Function to trigger the unit conversion and display the result
+ // Function to trigger unit conversion and display result
  function displayConversionResult() {
-  convertUnits(); // Call the conversion function
+  convertUnits();
  }
- // Function to perform the unit conversion
+ // Function to perform unit conversion
  function convertUnits() {
   const fromUnit = document.getElementById('fromUnit').value;
   const toUnit = document.getElementById('toUnit').value;
   const inputValue = parseFloat(document.getElementById('inputValue').value);
   const resultDiv = document.getElementById('result');
-  // Validate input
   if (isNaN(inputValue)) {
    resultDiv.textContent = 'Invalid Input';
    return;
   }
   let result;
-  // Perform conversion based on the selected unit type
   switch (document.getElementById('unitType').value) {
    case 'length':
     result = convertLength(inputValue, fromUnit, toUnit);
@@ -287,13 +246,11 @@
     result = convertTemperature(inputValue, fromUnit, toUnit);
     break;
   }
-  // Display the result
   resultDiv.textContent = `${result.toFixed(4)} ${toUnit}`;
  }
  // Function to convert length units
  function convertLength(value, fromUnit, toUnit) {
   let meters = value;
-  // Convert to meters
   switch (fromUnit) {
    case 'cm':
     meters = value / 100;
@@ -318,7 +275,6 @@
     break;
   }
   let result = meters;
-  // Convert from meters
   switch (toUnit) {
    case 'cm':
     result = meters * 100;
@@ -347,7 +303,6 @@
  // Function to convert mass units
  function convertMass(value, fromUnit, toUnit) {
   let kilograms = value;
-  // Convert to kilograms
   switch (fromUnit) {
    case 'g':
     kilograms = value / 1000;
@@ -363,7 +318,6 @@
     break;
   }
   let result = kilograms;
-  // Convert from kilograms
   switch (toUnit) {
    case 'g':
     result = kilograms * 1000;
@@ -383,7 +337,6 @@
  // Function to convert time units
  function convertTime(value, fromUnit, toUnit) {
   let seconds = value;
-  // Convert to seconds
   switch (fromUnit) {
    case 'ms':
     seconds = value / 1000;
@@ -399,7 +352,6 @@
     break;
   }
   let result = seconds;
-  // Convert from seconds
   switch (toUnit) {
    case 'ms':
     result = seconds * 1000;
@@ -419,7 +371,6 @@
  // Function to convert temperature units
  function convertTemperature(value, fromUnit, toUnit) {
   let celsius = value;
-  // Convert to Celsius
   switch (fromUnit) {
    case 'F':
     celsius = (value - 32) * 5 / 9;
@@ -429,7 +380,6 @@
     break;
   }
   let result = celsius;
-  // Convert from Celsius
   switch (toUnit) {
    case 'F':
     result = (celsius * 9 / 5) + 32;
@@ -440,7 +390,7 @@
   }
   return result;
  }
- // --- Test Functions (unchanged) ---
+ // --- Test Functions ---
  function runBasicTests() {
   console.log("--- Basic Tests ---");
   clearDisplay();
@@ -517,37 +467,41 @@
   memoryRecall();
   console.assert(display.value === '0', "Test 13 Failed: Memory Clear");
  }
- // Run the tests when the script loads
+ function runButtonInputTests() {
+  console.log("--- Button Input Tests ---");
+  clearDisplay();
+  document.querySelector('.buttons button[onclick*="appendNumber(\'7\')"]').click();
+  console.assert(display.value === '7', "Test 14 Failed: Button input 7");
+  clearDisplay();
+  document.querySelector('.buttons button[onclick*="appendOperator(\'+\')"]').click();
+  appendNumber('5');
+  calculate();
+  console.assert(display.value === '5', "Test 15 Failed: Button input +");
+  clearDisplay();
+  document.querySelector('.buttons button[onclick*="appendDecimal()"]').click();
+  appendNumber('2');
+  console.assert(display.value === '0.2', "Test 16 Failed: Button input .");
+  clearDisplay();
+  document.querySelector('.buttons button[onclick*="clearDisplay()"]').click();
+  console.assert(display.value === '', "Test 17 Failed: Button input C");
+  clearDisplay();
+  appendNumber('123');
+  document.querySelector('.buttons button[onclick*="deleteLast()"]').click();
+  console.assert(display.value === '12', "Test 18 Failed: Button input DEL");
+  clearDisplay();
+  appendNumber('9');
+  calculateSingleOperand('sin');
+  console.assert(display.value === '0.4121184850203191', "Test 19 Failed: Button input sin");
+  clearDisplay();
+  appendNumber('2');
+  appendOperator('pow');
+  appendNumber('3');
+  calculate();
+  console.assert(display.value === '8', "Test 20 Failed: Button input x^y");
+ }
+ // Run all tests
  runBasicTests();
  runScientificTests();
  runMemoryTests();
+ runButtonInputTests();
  console.log("All tests completed. Check the console for any 'Failed' assertions.");
- // Get references to input and display
- const keyboardInput = document.getElementById('keyboardInput');
- const displayElement = document.getElementById('display');
- // Event listener for input in the keyboard input
- keyboardInput.addEventListener('input', () => {
-  currentInput = keyboardInput.value;
-  displayElement.value = currentInput;
- });
- // Event listener for key presses in the keyboard input
- keyboardInput.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') {
-   try {
-    // Safely evaluate the expression
-    let result = new Function('return ' + currentInput)();
-    // Check if the result is a valid number
-    if (typeof result === 'number' && isFinite(result)) {
-     displayElement.value = result;
-     currentInput = String(result);
-     firstOperand = null;
-     operator = null;
-    } else {
-     displayElement.value = 'Error';
-    }
-   } catch (error) {
-    displayElement.value = 'Error';
-   }
-   event.preventDefault(); // Prevent default form submission
-  }
- });
