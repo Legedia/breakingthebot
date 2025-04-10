@@ -1,20 +1,17 @@
 // graph.js
-
 function plotGraph() {
     const canvas = document.getElementById('graphCanvas');
     const ctx = canvas.getContext('2d');
     const functionInput = document.getElementById('functionInput').value;
-  
     try {
      const points = [];
      for (let x = -10; x <= 10; x += 0.1) {
       let y = eval(functionInput.replace(/x/g, x));
       if (typeof y !== 'number' || isNaN(y) || !isFinite(y)) {
-       y = null; // Skip invalid y values for better fluidity
+       y = null;
       }
       points.push({ x: x, y: y });
      }
-  
      new Chart(ctx, {
       type: 'line',
       data: {
@@ -51,6 +48,11 @@ function plotGraph() {
          },
          grid: {
           color: '#555'
+         },
+         ticks: { // Added y-axis scaling
+          beginAtZero: true,
+          suggestedMin: -10,
+          suggestedMax: 10
          }
         }
        },
@@ -72,6 +74,5 @@ function plotGraph() {
      console.error("Graphing error:", error);
     }
    }
-  
    // Initial plot
    plotGraph();
