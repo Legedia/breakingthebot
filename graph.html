@@ -1,22 +1,25 @@
 <!DOCTYPE html>
- <html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Function Graph</title>
-  <link rel="stylesheet" href="graph.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
- </head>
- <body>
-  <div class="graph-container">
-   <h2 class="graph-title">Function Graph</h2>
-   <canvas id="graphCanvas"></canvas>
-   <div class="graph-input">
-    <label for="functionInput">f(x) = </label>
-    <input type="text" id="functionInput" placeholder="e.g., Math.sin(x)">
-    <button onclick="plotGraph()">Plot</button>
-   </div>
-  </div>
-  <script src="graph.js"></script>
- </body>
- </html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Graph</title>
+    <link rel="stylesheet" href="graph.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="graph-container">
+        <h2 class="graph-title">Function Graph</h2>
+        <canvas id="graphCanvas"></canvas>
+        <div class="graph-input">
+            <label for="functionInput">f(x) = </label>
+            <input type="text" id="functionInput" placeholder="e.g., Math.sin(x)">
+            <button onclick="plotGraph()">Plot</button>
+        </div>
+    </div>
+    <script src="graph.js"></script>
+</body>
+
+</html>

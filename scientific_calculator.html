@@ -1,81 +1,415 @@
 <!DOCTYPE html>
- <html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scientific Calculator</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="scientific_calculator.css">
- </head>
- <body>
-  <header>
-   <h1>Scientific Calculator</h1>
-   <p>
-    <a href="index.html" style="text-shadow: none;">Back to Main Page</a>
-   </p>
-  </header>
-  <main>
-   <section class="calculator">
-    <div class="display-container">
-     <input type="text" id="display" class="display" readonly placeholder="Calculator Output">
-    </div>
-    <div class="buttons">
-     <button class="function" onclick="memoryClear()">MC<span class="tooltip">Memory Clear</span></button>
-     <button class="function" onclick="memoryRecall()">MR<span class="tooltip">Memory Recall</span></button>
-     <button class="function" onclick="memoryAdd()">M+<span class="tooltip">Memory Add</span></button>
-     <button class="function" onclick="memorySubtract()">M-<span class="tooltip">Memory Subtract</span></button>
-     <button class="function" onclick="calculateSingleOperand('sin')">sin<span class="tooltip">Sine</span></button>
-     <button class="function" onclick="calculateSingleOperand('cos')">cos<span class="tooltip">Cosine</span></button>
-     <button class="function" onclick="calculateSingleOperand('tan')">tan<span class="tooltip">Tangent</span></button>
-     <button class="function" onclick="calculateSingleOperand('log')">log<span class="tooltip">Logarithm (base 10)</span></button>
-     <button class="function" onclick="calculateSingleOperand('ln')">ln<span class="tooltip">Natural Logarithm</span></button>
-     <button class="function" onclick="calculateSingleOperand('sqrt')">√<span class="tooltip">Square Root</span></button>
-     <button class="function" onclick="calculateSingleOperand('x^2')">x²<span class="tooltip">Square</span></button>
-     <button class="function" onclick="calculateSingleOperand('x^3')">x³<span class="tooltip">Cube</span></button>
-     <button class="function" onclick="calculateSingleOperand('1/x')">1/x<span class="tooltip">Reciprocal</span></button>
-     <button class="function" onclick="calculateSingleOperand('e^x')">e^x<span class="tooltip">Exponential (e^x)</span></button>
-     <button class="function" onclick="calculateSingleOperand('10^x')">10^x<span class="tooltip">10 to the power of x</span></button>
-     <button class="function" onclick="calculateSingleOperand('!')">x!<span class="tooltip">Factorial</span></button>
-     <button onclick="clearDisplay()">C<span class="tooltip">Clear</span></button>
-     <button onclick="deleteLast()">DEL<span class="tooltip">Delete</span></button>
-     <button onclick="appendNumber('7')">7<span class="tooltip">Seven</span></button>
-     <button onclick="appendNumber('8')">8<span class="tooltip">Eight</span></button>
-     <button onclick="appendNumber('9')">9<span class="tooltip">Nine</span></button>
-     <button class="operator" onclick="appendOperator('/')">/<span class="tooltip">Divide</span></button>
-     <button class="operator" onclick="appendOperator('*')">*<span class="tooltip">Multiply</span></button>
-     <button class="function" onclick="appendOperator('pow')">x^y<span class="tooltip">Power</span></button>
-     <button onclick="appendNumber('4')">4<span class="tooltip">Four</span></button>
-     <button onclick="appendNumber('5')">5<span class="tooltip">Five</span></button>
-     <button onclick="appendNumber('6')">6<span class="tooltip">Six</span></button>
-     <button class="operator" onclick="appendOperator('-')">-<span class="tooltip">Subtract</span></button>
-     <button class="operator" onclick="appendOperator('+')">+<span class="tooltip">Add</span></button>
-     <button class="equal" onclick="calculate()">=<span class="tooltip">Equals</span></button>
-     <button onclick="appendNumber('1')">1<span class="tooltip">One</span></button>
-     <button onclick="appendNumber('2')">2<span class="tooltip">Two</span></button>
-     <button onclick="appendNumber('3')">3<span class="tooltip">Three</span></button>
-     <button onclick="appendNumber('0')" class="zero">0<span class="tooltip">Zero</span></button>
-     <button onclick="appendDecimal()">.<span class="tooltip">Decimal</span></button>
-     <button onclick="openGraphWindow()">Graph<span class="tooltip">Open Graphing Tool</span></button>
-    </div>
-    <section class="unit-conversion-container">
-     <select id="unitType" onchange="populateUnits()">
-      <option value="">Select Type</option>
-      <option value="length">Length</option>
-      <option value="mass">Mass</option>
-      <option value="time">Time</option>
-      <option value="temperature">Temperature</option>
-     </select>
-     <select id="fromUnit"></select>
-     <input type="text" id="inputValue" placeholder="Value">
-     <select id="toUnit"></select>
-     <button onclick="displayConversionResult()">Convert</button>
-     <div id="result"></div>
-    </section>
-   </section>
-  </main>
-  <footer>
-   <p>&copy; 2025 BreakingtheBot</p>
-  </footer>
-  <script src="scientific_calculator.js"></script>
- </body>
- </html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Advanced Scientific Calculator
+    </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="scientific_calculator.css">
+    <style>
+        /* Combined Layout Styles */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #28426c;
+            color: #00ffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .calculator-container {
+            width: 450px;
+            /* Adjust as needed */
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto 1fr auto;
+            gap: 10px;
+            padding: 15px;
+            background-color: #222;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .graph-container {
+            width: 450px;
+            /* Match calculator width */
+            border: 2px solid #555;
+            border-radius: 10px;
+            background-color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+            margin-left: 10px;
+            /* Spacing */
+        }
+
+        .constants-container {
+            width: 450px;
+            /* Match calculator width */
+            border: 2px solid #555;
+            border-radius: 10px;
+            background-color: #333;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+            margin-left: 10px;
+            /* Spacing */
+        }
+
+        .display-container {
+            grid-column: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .display {
+            width: calc(100% - 20px);
+            padding: 10px;
+            background-color: #333;
+            color: #aaffaa;
+            font-size: 1.4em;
+            text-align: right;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #keyboardInput {
+            font-size: 1.1em;
+            color: #ccffcc;
+            padding: 8px;
+        }
+
+        .buttons {
+            grid-column: 1 / 1;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-gap: 8px;
+        }
+
+        .buttons button {
+            /* More specific selector */
+            padding: 8px;
+            font-size: 0.9em;
+            position: relative;
+            background-color: #444;
+            /* Default button color */
+            color: #aaffaa;
+        }
+
+        .buttons button:hover {
+            background-color: #555;
+        }
+
+        .buttons .operator {
+            /* Operator button color */
+            background-color: #666;
+            color: #ccffcc;
+        }
+
+        .buttons .equal {
+            /* Equal button color */
+            background-color: #aaffaa;
+            color: #222;
+        }
+
+        .buttons .function {
+            /* Function button color */
+            background-color: #555;
+            color: #bbf;
+        }
+
+        .buttons .memory {
+            /* Memory button color */
+            background-color: #777;
+            color: #ffccff;
+            font-size: 0.7em;
+        }
+
+        button .tooltip {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        button:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .unit-conversion-container {
+            grid-column: 1 / 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-rows: auto;
+            grid-gap: 5px;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 5px;
+            color: #bbf;
+            font-size: 0.8em;
+            align-items: center;
+        }
+
+        .unit-conversion-container select,
+        .unit-conversion-container input,
+        .unit-conversion-container button,
+        .unit-conversion-container div {
+            background-color: #444;
+            color: #aaffaa;
+            border: none;
+            border-radius: 3px;
+            padding: 5px;
+            font-size: 0.8em;
+            height: 30px;
+            box-sizing: border-box;
+        }
+
+        #result {
+            grid-column: 1 / 6;
+            text-align: center;
+        }
+
+        /* Graph Styles */
+        .graph-title {
+            color: #bbf;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        #graphCanvas {
+            width: 100%;
+            height: 300px;
+            /* Adjust height as needed */
+            background-color: #444;
+            border-radius: 5px;
+        }
+
+        .graph-input {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Center horizontally */
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .graph-input label {
+            color: #aaffaa;
+            font-size: 0.9em;
+        }
+
+        .graph-input input[type="text"] {
+            background-color: #444;
+            color: #aaffaa;
+            border: none;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 0.9em;
+            width: 150px;
+        }
+
+        .graph-input button {
+            padding: 8px 15px;
+            font-size: 0.9em;
+            background-color: #555;
+            color: #bbf;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .graph-input button:hover {
+            background-color: #666;
+        }
+
+        .graph-description {
+            color: #ccffcc;
+            font-size: 0.8em;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Constants Styles */
+        .constants-title {
+            color: #bbf;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .constants-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .constants-table th,
+        .constants-table td {
+            border: 1px solid #555;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .constants-table th {
+            background-color: #444;
+        }
+
+        .constants-table td {
+            color: #aaffaa;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>
+            Advanced Scientific Calculator
+        </h1>
+    </header>
+    <main>
+        <div class="calculator-container">
+            <div class="display-container">
+                <input type="text" id="display" class="display" readonly placeholder="Calculator Output">
+                <input type="text" id="keyboardInput" class="display" placeholder="Type calculator input here">
+            </div>
+
+            <div class="buttons">
+                <button class="function" onclick="memoryClear()">MC</button>
+                <button class="function" onclick="memoryRecall()">MR</button>
+                <button class="function" onclick="memoryAdd()">M+</button>
+                <button class="function" onclick="memorySubtract()">M-</button>
+                <button class="function" onclick="calculateSingleOperand('sin')">sin</button>
+                <button class="function" onclick="calculateSingleOperand('cos')">cos</button>
+
+                <button class="function" onclick="calculateSingleOperand('tan')">tan</button>
+                <button class="function" onclick="calculateSingleOperand('log')">log</button>
+                <button class="function" onclick="calculateSingleOperand('ln')">ln</button>
+                <button class="function" onclick="calculateSingleOperand('sqrt')">√</button>
+                <button class="function" onclick="calculateSingleOperand('x^2')">x²</button>
+                <button class="function" onclick="calculateSingleOperand('x^3')">x³</button>
+
+                <button class="function" onclick="calculateSingleOperand('1/x')">1/x</button>
+                <button class="function" onclick="calculateSingleOperand('e^x')">e^x</button>
+                <button class="function" onclick="calculateSingleOperand('10^x')">10^x</button>
+                <button class="function" onclick="calculateSingleOperand('!')">x!</button>
+                <button onclick="clearDisplay()">C</button>
+                <button onclick="deleteLast()">DEL</button>
+
+                <button onclick="appendNumber('7')">7</button>
+                <button onclick="appendNumber('8')">8</button>
+                <button onclick="appendNumber('9')">9</button>
+                <button class="operator" onclick="appendOperator('/')">/</button>
+                <button class="operator" onclick="appendOperator('*')">*</button>
+                <button class="function" onclick="appendOperator('pow')">x^y</button>
+
+                <button onclick="appendNumber('4')">4</button>
+                <button onclick="appendNumber('5')">5</button>
+                <button onclick="appendNumber('6')">6</button>
+                <button class="operator" onclick="appendOperator('-')">-</button>
+                <button class="operator" onclick="appendOperator('+')">+</button>
+                <button class="equal" onclick="calculate()">=</button>
+
+                <button onclick="appendNumber('1')">1</button>
+                <button onclick="appendNumber('2')">2</button>
+                <button onclick="appendNumber('3')">3</button>
+                <button onclick="appendNumber('0')" class="zero">0</button>
+                <button onclick="appendDecimal()">.</button>
+                <div></div>
+            </div>
+
+            <div class="graph-container">
+                <h3 class="graph-title">Function Graph</h3>
+                <canvas id="graphCanvas"></canvas>
+                <div class="graph-input">
+                    <label for="functionInput">f(x) = </label>
+                    <input type="text" id="functionInput" placeholder="e.g., Math.sin(x)">
+                    <button onclick="plotGraph()">Plot</button>
+                </div>
+                <p class="graph-description">
+                    Enter a JavaScript math function of 'x' (e.g., Math.sin(x), Math.pow(x, 2), x*Math.log(x)).
+                    The graph will be plotted for x values between -10 and 10.
+                </p>
+            </div>
+
+            <div class="constants-container">
+                <h3 class="constants-title">
+                    Physical Constants
+                </h3>
+                <table class="constants-table">
+                    <thead>
+                        <tr>
+                            <th>Constant</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Speed of light (c)</td>
+                            <td id="c-value">299792458 m/s</td>
+                        </tr>
+                        <tr>
+                            <td>Planck constant (h)</td>
+                            <td id="h-value">6.62607015e-34 J·s</td>
+                        </tr>
+                        <tr>
+                            <td>Gravitational constant (G)</td>
+                            <td id="G-value">6.67430e-11 N·m²/kg²</td>
+                        </tr>
+                        <tr>
+                            <td>Elementary charge (e)</td>
+                            <td id="e-value">1.602176634e-19 C</td>
+                        </tr>
+                        <tr>
+                            <td>Boltzmann constant (k)</td>
+                            <td id="k-value">1.380649e-23 J/K</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>
+            &copy; 2025 BreakingtheBot
+        </p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="scientific_calculator.js"></script>
+    <script src="graph.js"></script>
+</body>
+
+</html>
