@@ -30,12 +30,17 @@
 
         main {
             display: flex;
-            flex-grow: 1;
+            /* Use flex for horizontal layout */
+            justify-content: space-between;
+            /* Distribute space evenly */
+            flex-wrap: wrap;
+            /* Allow wrapping on smaller screens */
+            padding: 10px;
         }
 
         .calculator-container {
             width: 450px;
-            /* Adjust as needed */
+            /* Fixed width for calculator */
             display: grid;
             grid-template-columns: 1fr;
             grid-template-rows: auto auto 1fr auto;
@@ -44,11 +49,25 @@
             background-color: #222;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+            margin-bottom: 10px;
+            /* Add bottom margin */
+        }
+
+        .graph-constants-wrapper {
+            /* Wrapper for graph and constants */
+            display: flex;
+            flex-direction: column;
+            width: 450px;
+            /* Fixed width for graph and constants */
+            gap: 10px;
+            /* Spacing between graph and constants */
+            margin-left: 10px;
+            /* Spacing from calculator */
+            margin-bottom: 10px;
+            /* Add bottom margin */
         }
 
         .graph-container {
-            width: 450px;
-            /* Match calculator width */
             border: 2px solid #555;
             border-radius: 10px;
             background-color: #333;
@@ -57,13 +76,9 @@
             align-items: stretch;
             padding: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
-            margin-left: 10px;
-            /* Spacing */
         }
 
         .constants-container {
-            width: 450px;
-            /* Match calculator width */
             border: 2px solid #555;
             border-radius: 10px;
             background-color: #333;
@@ -71,8 +86,6 @@
             flex-direction: column;
             padding: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
-            margin-left: 10px;
-            /* Spacing */
         }
 
         .display-container {
@@ -350,7 +363,9 @@
                 <button onclick="appendDecimal()">.</button>
                 <div></div>
             </div>
+        </div>
 
+        <div class="graph-constants-wrapper">
             <div class="graph-container">
                 <h3 class="graph-title">Function Graph</h3>
                 <canvas id="graphCanvas"></canvas>
@@ -367,8 +382,21 @@
 
             <div class="constants-container">
                 <h3 class="constants-title">
-                    Physical Constants
+                    Physical Constants & Units
                 </h3>
+                <div class="unit-conversion-container">
+                    <select id="unitType" onchange="populateUnits()">
+                        <option value="length">Length</option>
+                        <option value="mass">Mass</option>
+                        <option value="time">Time</option>
+                        <option value="temperature">Temperature</option>
+                    </select>
+                    <select id="fromUnit"></select>
+                    <input type="text" id="inputValue" placeholder="Value">
+                    <select id="toUnit"></select>
+                    <button onclick="displayConversionResult()">Convert</button>
+                    <div id="result">Result</div>
+                </div>
                 <table class="constants-table">
                     <thead>
                         <tr>
