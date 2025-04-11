@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="scientific_calculator.css">
     <style>
         /* Combined Layout Styles */
+
         body {
             font-family: sans-serif;
             margin: 0;
@@ -215,6 +216,7 @@
         }
 
         /* Graph Styles */
+
         .graph-title {
             color: #bbf;
             font-size: 1.2em;
@@ -277,6 +279,7 @@
         }
 
         /* Constants Styles */
+
         .constants-title {
             color: #bbf;
             font-size: 1.2em;
@@ -303,6 +306,67 @@
 
         .constants-table td {
             color: #aaffaa;
+        }
+
+        /* CAS Styles */
+
+        .cas-container {
+            border: 2px solid #555;
+            border-radius: 10px;
+            background-color: #333;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+            margin-top: 10px;
+            /* Spacing from constants */
+        }
+
+        .cas-title {
+            color: #bbf;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .cas-input {
+            background-color: #444;
+            color: #aaffaa;
+            border: none;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 0.9em;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .cas-button {
+            padding: 8px 15px;
+            font-size: 0.9em;
+            background-color: #555;
+            color: #bbf;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cas-button:hover {
+            background-color: #666;
+        }
+
+        .cas-output {
+            background-color: #444;
+            color: #ccffcc;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1em;
+            white-space: pre-wrap;
+            /* Preserve formatting */
+            overflow-x: auto;
+            /* Horizontal scroll */
         }
     </style>
 </head>
@@ -372,7 +436,7 @@
                 <div class="graph-input">
                     <label for="functionInput">f(x) = </label>
                     <input type="text" id="functionInput" placeholder="e.g., Math.sin(x)">
-                    <button onclick="plotGraph()">Plot</button>
+                    <button class="graph-button" onclick="plotGraph()">Plot</button>
                 </div>
                 <p class="graph-description">
                     Enter a JavaScript math function of 'x' (e.g., Math.sin(x), Math.pow(x, 2), x*Math.log(x)).
@@ -394,7 +458,7 @@
                     <select id="fromUnit"></select>
                     <input type="text" id="inputValue" placeholder="Value">
                     <select id="toUnit"></select>
-                    <button onclick="displayConversionResult()">Convert</button>
+                    <button class="unit-button" onclick="displayConversionResult()">Convert</button>
                     <div id="result">Result</div>
                 </div>
                 <table class="constants-table">
@@ -428,6 +492,15 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="cas-container">
+                <h3 class="cas-title">
+                    Computer Algebra System (CAS)
+                </h3>
+                <input type="text" id="casInput" class="cas-input" placeholder="Enter expression (e.g., x^2 + 3*x - 4)">
+                <button class="cas-button" onclick="evaluateCAS()">Evaluate</button>
+                <pre id="casOutput" class="cas-output"></pre>
+            </div>
         </div>
     </main>
     <footer>
@@ -438,6 +511,28 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="scientific_calculator.js"></script>
     <script src="graph.js"></script>
+    <script>
+        // CAS Evaluation (Basic Placeholder)
+
+        function evaluateCAS() {
+            const casInput = document.getElementById('casInput').value;
+            const casOutput = document.getElementById('casOutput');
+
+            try {
+                // VERY BASIC placeholder - replace with a real CAS library
+                const result = eval(casInput.replace(/\^/g, '**'));
+
+                if (typeof result === 'number' && isFinite(result)) {
+                    casOutput.textContent = result;
+                } else {
+                    casOutput.textContent = "Result: " + String(result);
+                }
+
+            } catch (error) {
+                casOutput.textContent = "Error: " + error.message;
+            }
+        }
+    </script>
 </body>
 
 </html>
